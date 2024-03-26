@@ -51,7 +51,7 @@ contract PolymerL2CrosschainToken is ERC20, UniversalChanIbcApp {
             decreaseAllowance(from, amount);
         }
         bytes memory payload = abi.encode(from, to, amount);
-        uint64 timeoutTimestamp = uint64(block.timestamp) + 2 hours;
+        uint64 timeoutTimestamp = uint64((block.timestamp + 36000) * 1000000000);
         IbcUniversalPacketSender(mw).sendUniversalPacket(
             channelId, IbcUtils.toBytes32(destPortAddr), payload, timeoutTimestamp
         );
